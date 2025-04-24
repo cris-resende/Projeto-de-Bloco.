@@ -3,6 +3,7 @@ package br.edu.infnet.app.model.domain;
 import java.util.List;
 
 public class Produto {
+    public int codigo;
     public String nomeProduto;
     public String categoria;
     public double preco;
@@ -11,6 +12,6 @@ public class Produto {
     
     @Override
     public String toString() {
-        return String.format("Produto: %s - Categoria: %s - Preço: %f - Estoque: %d", nomeProduto, categoria, preco, estoque);
+        return String.format("Código: %d - Produto: %s - Categoria: %s - Preço: %f - Estoque: %d", codigo, nomeProduto, categoria, preco, estoque);
     }
 }

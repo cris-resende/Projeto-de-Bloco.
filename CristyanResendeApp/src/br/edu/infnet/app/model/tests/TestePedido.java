@@ -7,12 +7,25 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.text.DateFormatter;
 
 import br.edu.infnet.app.model.domain.Pedido;
 
 public class TestePedido {
+
+    private static Map<String, Pedido> mapaPedidos = new HashMap<String, Pedido>();
+
+    private static void incluirPedido(Pedido p){
+        mapaPedidos.put(p.cliente,p);
+    }
+
+    private static Collection<Pedido> obterPedidos(){
+        return mapaPedidos.values();
+    }
     public static void main(String[] args) {
         try{
             FileReader arquivoPedidos = new FileReader("CristyanResendeApp\\pedidos.csv");
@@ -32,10 +45,12 @@ public class TestePedido {
                 p.data = LocalDate.parse(campos[2], formato);
                 p.status = campos[3];
 
+                incluirPedido(p);
+                linha = leituraPedidos.readLine();
+            }
+            for (Pedido p : obterPedidos()){
                 System.out.println(p);
                 System.out.println("---------------------------------------------------------------------------------------------");
-
-                linha = leituraPedidos.readLine();
             }
             leituraPedidos.close();
         } catch (FileNotFoundException e) {
